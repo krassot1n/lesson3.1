@@ -33,7 +33,7 @@ public class StudentService {
     }
 
     public Collection<Student> findStudentsByAge(int age) {
-        List<Student> studentList = new ArrayList<>();
+        ArrayList<Student> studentList = new ArrayList<>();
         for (Student student: students.values()) {
             if (student.getAge()==age){
                 studentList.add(student);

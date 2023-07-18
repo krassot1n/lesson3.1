@@ -33,7 +33,7 @@ public class FacultyService {
     }
 
     public Collection<Faculty> findFacultyByColor(String color) {
-        List<Faculty> facultyList = new ArrayList<>();
+        ArrayList<Faculty> facultyList = new ArrayList<>();
         for (Faculty faculty: facultyHashMap.values()) {
             if (Objects.equals(faculty.getColor(),color)){
                 facultyList.add(faculty);
