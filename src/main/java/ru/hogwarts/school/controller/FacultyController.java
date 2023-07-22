@@ -28,8 +28,8 @@ public class FacultyController {
         return service.creatFaculty(faculty);
     }
     @DeleteMapping("{id}")
-    public Faculty removeFaculty(@PathVariable long id){
-        return service.removeFaculty(id);
+    public void removeFaculty(@PathVariable long id){
+        service.removeFaculty(id);
     }
     @PutMapping
     public Faculty changeFaculty(@RequestBody Faculty faculty){

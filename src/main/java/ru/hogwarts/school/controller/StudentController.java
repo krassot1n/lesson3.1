@@ -33,8 +33,8 @@ public class StudentController {
     }
 
     @DeleteMapping("{id}")
-    public Student removeStudent(@PathVariable long id) {
-        return service.removeStudent(id);
+    public void removeStudent(@PathVariable long id) {
+        service.removeStudent(id);
     }
 
     @PutMapping

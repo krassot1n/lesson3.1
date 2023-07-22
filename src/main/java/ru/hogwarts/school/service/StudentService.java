@@ -1,40 +1,38 @@
 package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
-import ru.hogwarts.school.exceptions.StudentNotFoundException;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.*;
 
 @Service
 public class StudentService {
-    HashMap<Long, Student> students = new HashMap<>();
-    private long idCount = 0;
+    private final StudentRepository repository;
+
+    public StudentService(StudentRepository repository) {
+        this.repository = repository;
+    }
 
     public Student creatStudent(Student student){
-        student.setId(++idCount);
-        students.put(student.getId(),student);
-        return student;
+        return repository.save(student);
     }
 
     public Student findStudent(long id){
-        return students.get(id);
+        return repository.findById(id).get();
     }
 
-    public Student removeStudent(long id){
-        return students.remove(id);
+    public void removeStudent(long id){
+        repository.deleteById(id);
     }
 
     public Student editStudent(Student student){
-        if (students.containsKey(student.getId())) {
-            return students.put(student.getId(),student);
-        }
-        throw new StudentNotFoundException("Студент с таким ID не найден");
+        return repository.save(student);
     }
 
     public Collection<Student> findStudentsByAge(int age) {
         List<Student> studentList = new ArrayList<>();
-        for (Student student: students.values()) {
+        for (Student student: repository.findAll()) {
             if (student.getAge()==age){
                 studentList.add(student);
             }
