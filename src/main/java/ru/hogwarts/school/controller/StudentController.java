@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @RestController
-@RequestMapping("student")
+@RequestMapping("/student")
 public class StudentController {
     private final StudentService service;
 
@@ -41,11 +41,9 @@ public class StudentController {
     public Student changeStudent(@RequestBody Student student) {
         return service.editStudent(student);
     }
-    @GetMapping("age")
-    public Collection<Student> studentsByAge(@PathVariable int age) {
-        if (age > 0) {
-            return service.findStudentsByAge(age);
-        }
-        return Collections.emptyList();
+
+    @GetMapping("/byAge")
+    public Collection<Student> studentsByAge(@RequestParam int minAge, @RequestParam int maxAge) {
+        return service.findStudentsByAgeBetween(minAge, maxAge);
     }
 }
