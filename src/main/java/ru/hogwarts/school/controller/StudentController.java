@@ -46,4 +46,8 @@ public class StudentController {
     public Collection<Student> studentsByAge(@RequestParam int minAge, @RequestParam int maxAge) {
         return service.findStudentsByAgeBetween(minAge, maxAge);
     }
+    @GetMapping("/{studId}/faculty")
+    public Faculty findStudentFaculty(@PathVariable int studId){
+        return service.findStudent(studId).getFaculty();
+    }
 }
