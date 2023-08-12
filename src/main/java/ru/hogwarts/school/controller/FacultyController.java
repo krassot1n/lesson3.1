@@ -25,7 +25,7 @@ public class FacultyController {
         return ResponseEntity.ok(faculty);
     }
     @PostMapping
-    public Faculty addFaculty(@RequestBody Faculty faculty){
+    public  Faculty addFaculty(@RequestBody Faculty faculty){
         return service.creatFaculty(faculty);
     }
     @DeleteMapping("{id}")
@@ -33,8 +33,13 @@ public class FacultyController {
         service.removeFaculty(id);
     }
     @PutMapping
-    public Faculty changeFaculty(@RequestBody Faculty faculty){
-        return service.editFaculty(faculty);
+    public ResponseEntity<Faculty> changeFaculty(@RequestBody Faculty faculty){
+        Faculty editiedFaculty = service.editFaculty(faculty);
+        if(editiedFaculty == null){
+            ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(faculty);
+
     }
     @GetMapping("/findByColor")
     public Collection<Faculty> facultyByColorOrName(@RequestParam(required = false) String name,@RequestParam(required = false) String color){
