@@ -49,4 +49,18 @@ public class StudentController {
     public String findStudentFaculty(@PathVariable int studId){
         return service.findStudent(studId).getFaculty().getName();
     }
+    @GetMapping("/count")
+    public int getCountOfStudents(){
+        return service.getCountOfStudent();
+    }
+
+    @GetMapping("/average_age")
+    public int getAverageAgeOfStudents(){
+        return service.getAverageAge();
+    }
+
+    @GetMapping("/last_five")
+    public Collection<Student> findLastFiveStudents(){
+        return service.findLastFiveStudents();
+    }
 }
