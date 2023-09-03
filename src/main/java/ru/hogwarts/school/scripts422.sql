@@ -10,7 +10,11 @@ CREATE table car(
                       model varchar(150),
                       cost money);
 
-alter table person add column car_id serial;
+alter table human add column car_id serial;
+alter table human
+add constraint FK_car_id FOREIGN KEY (car_id)
+references human.car_id(car_id)
+on update set null
 
 select s.name, s.age, faculty.name
 from student as s
