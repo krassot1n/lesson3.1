@@ -49,6 +49,11 @@ public class StudentController {
     public String findStudentFaculty(@PathVariable int studId){
         return service.findStudent(studId).getFaculty().getName();
     }
+    @GetMapping("/{name}")
+    public ResponseEntity<Collection<Student>> getStudentByName(@PathVariable("name") String name){
+        Collection<Student> students = service.getStudentByName(name);
+        return ResponseEntity.ok(students);
+    }
     @GetMapping("/count")
     public int getCountOfStudents(){
         return service.getCountOfStudent();

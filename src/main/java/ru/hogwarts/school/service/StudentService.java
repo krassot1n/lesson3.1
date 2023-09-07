@@ -1,5 +1,6 @@
 package ru.hogwarts.school.service;
 
+import antlr.actions.python.CodeLexer;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
@@ -40,6 +41,10 @@ public class StudentService {
         }
         return studentList;
 
+    }
+
+    public Collection<Student> getStudentByName(String name){
+        return repository.getStudentsByName(name);
     }
 
     public Collection<Student> findStudentsByAgeBetween(int minAge, int maxAge){

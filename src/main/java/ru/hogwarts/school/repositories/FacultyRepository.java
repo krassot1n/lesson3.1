@@ -5,10 +5,13 @@ import org.springframework.stereotype.Repository;
 import ru.hogwarts.school.model.Faculty;
 
 import java.util.Collection;
+import java.util.List;
 
 @Repository
 public interface FacultyRepository extends JpaRepository<Faculty, Long> {
-    public Collection<Faculty> findAllByColorOrNameIgnoreCase(String name, String color);
+    Collection<Faculty> findAllByColorOrNameIgnoreCase(String name, String color);
+
+    List<Faculty> findFacultyByNameContainingIgnoreCaseAndColorContainingIgnoreCase(String name, String color);
 
 
 }
