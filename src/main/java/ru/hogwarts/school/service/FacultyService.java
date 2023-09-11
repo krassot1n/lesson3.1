@@ -1,5 +1,7 @@
 package ru.hogwarts.school.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.exceptions.FacultyNotFoundException;
 import ru.hogwarts.school.model.Faculty;
@@ -11,11 +13,14 @@ import java.util.*;
 public class FacultyService {
     private final FacultyRepository repository;
 
+    Logger logger = LoggerFactory.getLogger(FacultyService.class);
+
     public FacultyService(FacultyRepository repository) {
         this.repository = repository;
     }
 
     public Faculty creatFaculty(Faculty faculty){
+        logger.debug("Вызван метод создания студента");
         return repository.save(faculty);
     }
 
