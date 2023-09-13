@@ -1,6 +1,5 @@
 package ru.hogwarts.school.service;
 
-import antlr.actions.python.CodeLexer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -8,6 +7,7 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -66,9 +66,12 @@ public class StudentService {
         logger.debug("Вызван метов подсчета количества студентов");
         return repository.countStudents();
     }
-    public int getAverageAge(){
+    public double getAverageAge(){
         logger.debug("Вызван метов получения среднего возраста студентов");
-        return repository.averageAgeOfStudents();
+        return repository.findAll().stream()
+                .mapToDouble(Student::getAge)
+                .average()
+                .orElse(0d);
     }
 
     public Collection<Student> findLastFiveStudents(){
@@ -76,4 +79,10 @@ public class StudentService {
         return repository.findLastFiveStudents();
     }
 
+    public List<Student> getStudentsAlphabetOrder() {
+        return repository.findAll().stream().
+                filter(student -> student.getName().startsWith("А")).
+                sorted(Comparator.comparing(Student::getName)).
+                collect(Collectors.toList());
+    }
 }

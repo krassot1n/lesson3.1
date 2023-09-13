@@ -63,4 +63,14 @@ public class FacultyController {
         List<Faculty> faculties = service.findFacultyByNameAndColor(name, color);
         return ResponseEntity.ok(faculties);
     }
+
+    @GetMapping("/longest_name")
+    public Faculty longestNameOfFaculty() {
+        return service.findLongestNameOfFaculty();
+    }
+
+    @GetMapping("/get_integer_number")
+    public int getIntegerNumber() {
+        return service.getIntegerNumber();
+    }
 }

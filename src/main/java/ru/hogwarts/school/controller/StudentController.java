@@ -45,27 +45,36 @@ public class StudentController {
     public Collection<Student> studentsByAge(@RequestParam int minAge, @RequestParam int maxAge) {
         return service.findStudentsByAgeBetween(minAge, maxAge);
     }
+
     @GetMapping("/{studId}/faculty")
-    public String findStudentFaculty(@PathVariable int studId){
+    public String findStudentFaculty(@PathVariable int studId) {
         return service.findStudent(studId).getFaculty().getName();
     }
+
     @GetMapping("/{name}")
-    public ResponseEntity<Collection<Student>> getStudentByName(@PathVariable("name") String name){
+    public ResponseEntity<Collection<Student>> getStudentByName(@PathVariable("name") String name) {
         Collection<Student> students = service.getStudentByName(name);
         return ResponseEntity.ok(students);
     }
+
     @GetMapping("/count")
-    public int getCountOfStudents(){
+    public int getCountOfStudents() {
         return service.getCountOfStudent();
     }
 
     @GetMapping("/average_age")
-    public int getAverageAgeOfStudents(){
+    public double getAverageAgeOfStudents() {
         return service.getAverageAge();
     }
 
     @GetMapping("/last_five")
-    public Collection<Student> findLastFiveStudents(){
+    public Collection<Student> findLastFiveStudents() {
         return service.findLastFiveStudents();
     }
+
+    @GetMapping("/get_students_alphabetic_order")
+    public Collection<Student> getStudentAlphabeticOrder() {
+        return service.getStudentsAlphabetOrder();
+    }
+
 }
