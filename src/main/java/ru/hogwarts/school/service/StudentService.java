@@ -85,4 +85,47 @@ public class StudentService {
                 sorted(Comparator.comparing(Student::getName)).
                 collect(Collectors.toList());
     }
+
+    public void studentsThread() {
+        System.out.println("Name of the 0 student: " + repository.findAll().get(0).getName());
+        System.out.println("Name of the 1st student: " + repository.findAll().get(1).getName());
+
+        Thread thread1 = new Thread(() -> {
+            System.out.println("Name of the 2nd student: " + repository.findAll().get(2).getName());
+            System.out.println("Name of the 3rd student: " + repository.findAll().get(3).getName());
+        });
+        thread1.start();
+
+        Thread thread2 = new Thread(() -> {
+            System.out.println("Name of the 4th student: " + repository.findAll().get(4).getName());
+            System.out.println("Name of the 5th student: " + repository.findAll().get(5).getName());
+        });
+        thread2.start();
+    }
+
+    public void synchronizedStudentsThread() {
+        logger.debug("Called method doSynchronizedStudentsThread");
+        System.out.println("Name of the 0 student: " + repository.findAll().get(0).getName());
+        System.out.println("Name of the 1st student: " + repository.findAll().get(1).getName());
+
+        Thread thread1 = new Thread(() -> {
+            synchronized (StudentService.class) {
+                System.out.println("Name of the 2nd student: " + repository.findAll().get(2).getName());
+            }
+            synchronized (StudentService.class) {
+                System.out.println("Name of the 3rd student: " + repository.findAll().get(3).getName());
+            }
+        });
+        thread1.start();
+
+        Thread thread2 = new Thread(() -> {
+            synchronized (StudentService.class) {
+                System.out.println("Name of the 4th student: " + repository.findAll().get(4).getName());
+            }
+            synchronized (StudentService.class) {
+                System.out.println("Name of the 5th student: " + repository.findAll().get(5).getName());
+            }
+        });
+        thread2.start();
+    }
 }

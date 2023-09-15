@@ -77,4 +77,14 @@ public class StudentController {
         return service.getStudentsAlphabetOrder();
     }
 
+    @GetMapping("/student_thread")
+    public void doStudentsThread() {
+        service.studentsThread();
+    }
+
+    @GetMapping("/synchronized_student_thread")
+    public void doSynchronizedStudentsThread() {
+        service.synchronizedStudentsThread();
+
+    }
 }
